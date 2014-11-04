@@ -18,6 +18,8 @@
 - (BOOL)addData:(NSData *)data forKey:(NSString *)key error:(NSError **)error {
   NSMutableDictionary *query = [self queryDictionaryForKey:key];
   query[(__bridge id)kSecValueData] = data;
+  query[(__bridge id)kSecAttrAccessible] = (__bridge id)[self accessibilityStateCFType];
+
 
   OSStatus status = SecItemAdd((__bridge CFDictionaryRef)query, NULL);
   if (status != noErr) {
